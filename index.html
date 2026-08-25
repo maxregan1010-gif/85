@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>shahedi-skyline</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Tahoma,Arial,sans-serif;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(192, 33, 5, 0.637),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 80% 75%,
+            rgba(60,130,255,.25),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            135deg,
+            #2e0502,
+            #10192d,
+            #070b13
+        );
+
+    color:white;
+}
+
+
+/* =====================================
+   دسکتاپ
+===================================== */
+
+.desktop{
+
+    position:relative;
+
+    width:100%;
+    height:100vh;
+}
+
+
+/* نور پس زمینه */
+
+.glow{
+
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    border-radius:50%;
+
+    background:rgba(60,120,255,.10);
+
+    filter:blur(100px);
+
+    pointer-events:none;
+}
+
+.glow.one{
+
+    top:-180px;
+    left:-150px;
+}
+
+.glow.two{
+
+    bottom:-180px;
+    right:-150px;
+}
+
+
+/* =====================================
+   نوار بالایی
+===================================== */
+
+.taskbar{
+
+    position:absolute;
+
+    top:10px;
+    left:18px;
+    right:18px;
+
+    height:48px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(255,255,255,.065);
+
+    border:1px solid rgba(255,255,255,.13);
+
+    border-radius:15px;
+
+    backdrop-filter:blur(28px);
+
+    -webkit-backdrop-filter:blur(28px);
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.28),
+        inset 0 1px rgba(255,255,255,.12);
+
+    z-index:100;
+}
+
+
+/* =====================================
+   عنوان
+===================================== */
+
+.title{
+
+    position:absolute;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    background:linear-gradient(
+        180deg,
+        rgb(90, 187, 252),
+        rgba(175, 99, 54, 0.35)
+    );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    filter:
+        drop-shadow(
+            0 0 7px rgba(208, 255, 229, 0.55)
+        );
+}
+
+
+/* =====================================
+   دکمه ورود
+===================================== */
+
+.login-btn{
+
+    position:absolute;
+
+    left:calc(50% + 87px);
+
+    height:34px;
+
+    padding:0 15px;
+
+    border-radius:10px;
+
+    border:1px solid rgba(255,255,255,.16);
+
+    background:rgba(255,255,255,.09);
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:13px;
+
+    backdrop-filter:blur(15px);
+
+    transition:
+        background .1s,
+        border-color .1s,
+        box-shadow .1s;
+}
+
+.login-btn:hover{
+
+    background:rgba(255,255,255,.15);
+
+    border-color:rgba(255,255,255,.35);
+
+    box-shadow:
+        0 0 15px rgba(140,190,255,.20);
+}
+
+
+/* =====================================
+   نوشته وسط
+===================================== */
+
+.welcome{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    text-align:center;
+}
+
+.welcome h1{
+
+    font-size:68px;
+
+    letter-spacing:7px;
+
+    background:linear-gradient(
+        180deg,
+        rgba(255,255,255,.95),
+        rgba(170,200,255,.25)
+    );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    filter:
+        drop-shadow(
+            0 0 15px rgba(90,150,255,.3)
+        );
+}
+
+.welcome p{
+
+    margin-top:10px;
+
+    color:rgba(255,255,255,.4);
+
+    font-size:14px;
+}
+
+
+/* =====================================
+   نوار کنترل پایین
+===================================== */
+
+.bottom-area{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:22px;
+
+    transform:translateX(-50%);
+
+    /*
+       عرض دقیق برای دو دکمه:
+       58 + 12 + 58 = 128
+    */
+
+    width:128px;
+
+    height:58px;
+
+    z-index:200;
+}
+
+
+/* =====================================
+   START
+===================================== */
+
+.start-button{
+
+    position:absolute;
+
+    /*
+       مرکز دقیق صفحه
+    */
+
+    left:50%;
+
+    top:0;
+
+    transform:translateX(-50%);
+
+    width:58px;
+    height:58px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(255,255,255,.09);
+
+    border:1px solid rgba(255,255,255,.20);
+
+    backdrop-filter:blur(25px);
+
+    -webkit-backdrop-filter:blur(25px);
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.35),
+        inset 0 1px rgba(255,255,255,.14);
+
+    cursor:pointer;
+
+    transition:
+        background .2s,
+        border-color .2s,
+        box-shadow .2s;
+}
+
+
+/* فقط روشن شدن */
+
+.start-button:hover{
+
+    transform:translateX(-50%);
+
+    background:rgba(255,255,255,.16);
+
+    border-color:rgba(255,255,255,.40);
+
+    box-shadow:
+
+        0 8px 30px rgba(0,0,0,.35),
+
+        0 0 18px rgba(120,180,255,.25),
+
+        inset 0 1px rgba(255,255,255,.20);
+}
+
+
+/* =====================================
+   لوگوی Start
+===================================== */
+
+.start-icon{
+
+    width:24px;
+    height:24px;
+
+    display:grid;
+
+    grid-template-columns:1fr 2fr;
+
+    grid-template-rows:2.16fr 1fr;
+
+    gap:3px;
+}
+
+.start-icon span{
+
+    background:rgba(255,255,255,.92);
+
+    border-radius:2px;
+
+    box-shadow:
+        0 0 5px rgba(255,255,255,.4);
+}
+
+
+/* =====================================
+   دکمه بستن
+===================================== */
+
+.bottom-close{
+
+    position:absolute;
+
+    /*
+       دقیقاً 12px سمت چپ Start
+    */
+
+    left:0;
+
+    right:50%;
+
+    top:0;
+
+    width:58px;
+    height:58px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(255,255,255,.20);
+
+    background:rgba(255,255,255,.09);
+
+    color:rgba(255,255,255,.88);
+
+    font-size:26px;
+
+    cursor:pointer;
+
+    backdrop-filter:blur(25px);
+
+    -webkit-backdrop-filter:blur(25px);
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.35),
+        inset 0 1px rgba(255,255,255,.14);
+
+    transition:
+        background .2s,
+        border-color .2s,
+        box-shadow .2s;
+}
+
+
+/*
+   فقط روشن شدن
+*/
+
+.bottom-close:hover{
+
+    transform:none;
+
+    background:rgba(255,255,255,.16);
+
+    border-color:rgba(255,255,255,.40);
+
+    box-shadow:
+
+        0 8px 30px rgba(0,0,0,.35),
+
+        0 0 18px rgba(255,130,130,.22),
+
+        inset 0 1px rgba(255,255,255,.20);
+}
+
+
+/* =====================================
+   منوی Start
+===================================== */
+
+.start-menu{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:92px;
+
+    transform:
+        translateX(-50%)
+        translateY(15px);
+
+    width:310px;
+
+    padding:25px;
+
+    background:rgba(15,22,38,.72);
+
+    border:1px solid rgba(255,255,255,.16);
+
+    border-radius:20px;
+
+    backdrop-filter:blur(30px);
+
+    -webkit-backdrop-filter:blur(30px);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.5);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:
+        opacity .25s,
+        transform .25s;
+
+    z-index:150;
+}
+
+.start-menu.active{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+.start-menu h2{
+
+    font-size:17px;
+
+    margin-bottom:15px;
+
+    text-align:center;
+
+    color:rgba(255,255,255,.9);
+}
+
+
+/* گزینه های Start */
+
+.menu-item{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-bottom:7px;
+
+    border-radius:12px;
+
+    border:2px solid transparent;
+
+    color:white;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:
+        background .0.1s,
+        border-color .0.1s,
+        box-shadow .0.1s;
+}
+
+
+/* فقط روشن شدن */
+
+.menu-item:hover{
+
+    transform:none;
+
+    background:rgba(255,255,255,.13);
+
+    border-color:rgba(255,255,255,.22);
+
+    box-shadow:
+        0 0 14px rgba(140,190,255,.13);
+}
+
+
+/* =====================================
+   پنجره ورود
+===================================== */
+
+.link-window{
+
+    text-align: left;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.9);
+
+    width:400px;
+
+    max-width:90%;
+
+    padding:25px;
+
+    background:rgba(15,22,38,.80);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    border-radius:20px;
+
+    backdrop-filter:blur(30px);
+
+    -webkit-backdrop-filter:blur(30px);
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.55);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:
+        opacity .25s,
+        transform .25s;
+
+    z-index:300;
+}
+
+.link-window.active{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1);
+}
+
+.link-window h2{
+
+    margin-bottom:12px;
+}
+
+.link-window p{
+
+    color:rgba(255,255,255,.55);
+
+    line-height:1.9;
+
+    font-size:13px;
+}
+
+.window-close{
+
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-top:20px;
+
+    width:100%;
+
+    padding:11px;
+
+    border-radius:10px;
+
+    border:1px solid transparent;
+
+    background:rgba(255,255,255,.09);
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:
+        background .1s,
+        border-color .1s,
+        box-shadow .1s;
+}
+
+.window-close:hover{
+
+    background:rgba(255,255,255,.15);
+
+    border-color:rgba(255,255,255,.25);
+
+    box-shadow:
+        0 0 14px rgba(140,190,255,.15);
+}
+
+
+/* =====================================
+   موبایل
+===================================== */
+
+@media(max-width:60px){
+
+    .taskbar{
+
+        top:8px;
+        left:8px;
+        right:8px;
+    }
+
+    .title{
+        font-size:17px;
+    }
+
+    .login-btn{
+
+        left:calc(50% + 62px);
+
+        padding:0 10px;
+
+        font-size:12px;
+    }
+
+    .welcome h1{
+
+        font-size:45px;
+
+        letter-spacing:4px;
+    }
+
+    .bottom-area{
+
+        bottom:18px;
+
+        width:128px;
+    }
+    .start-button{
+        bottom: 20px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="desktop">
+
+
+    <!-- نورهای پس زمینه -->
+
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+
+
+    <!-- =========================
+         نوار بالا
+    ========================== -->
+
+    <div class="taskbar">
+
+        <div class="title">
+            !?are you gay
+        </div>
+
+
+        <button
+            class="login-btn"
+            onclick="openLink()">
+
+            💎
+
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         مرکز صفحه
+    ========================== -->
+
+    <div class="welcome">
+
+        <h1>
+            👑701👑 
+        </h1>
+
+    </div>
+
+
+    <!-- =========================
+         منوی Start
+    ========================== -->
+
+    <div
+        class="start-menu"
+        id="startMenu">
+
+        <h2 style="margin-bottom: 30px;">
+            menu
+        </h2>
+
+        <a
+            class="menu-item"
+            onclick="closeTrex()"
+            title="close Trex-0">
+
+            ❎
+
+        </a>
+
+        <a
+            class="menu-item"
+            href="https://maxregan1010-gif.github.io/scroll/"
+            target="_blank">
+            
+        اسکرولا
+
+        </a>
+
+    </div>
+
+
+    <!-- =========================
+         دکمه های پایین
+    ========================== -->
+
+    <div class="bottom-area">
+
+        <!-- Start -->
+
+        <div
+            class="start-button"
+            onclick="toggleStart()"
+            title="Start">
+
+            <div class="start-icon">
+
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         پنجره ورود
+    ========================== -->
+
+    <div
+        class="link-window"
+        id="linkWindow">
+
+        <p>
+        این یه پلتفرم زیبای 701 و یکیه
+        </p>
+        <p>
+        امیدوارم ازش لذت ببرید :)
+        </p>
+        <p>
+        بشا
+        </p>
+        <button
+            class="window-close"
+            onclick="closeLink()">
+
+            CLOSE
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+/* =========================
+   Start
+========================= */
+
+function toggleStart(){
+
+    document
+        .getElementById("startMenu")
+        .classList.toggle("active");
+
+}
+
+
+/* =========================
+   ورود
+========================= */
+
+function openLink(){
+
+    document
+        .getElementById("linkWindow")
+        .classList.add("active");
+
+}
+
+
+/* =========================
+   بستن پنجره ورود
+========================= */
+
+function closeLink(){
+
+    document
+        .getElementById("linkWindow")
+        .classList.remove("active");
+
+}
+
+
+/* =========================
+   بستن Trex-0
+========================= */
+
+function closeTrex(){
+
+    window.close();
+
+}
+
+</script>
+
+</body>
+</html>
