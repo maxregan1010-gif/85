@@ -130,7 +130,7 @@ body{
 
 
 /* =====================================
-   عنوان
+   عنوان RGB گیمینگ
 ===================================== */
 
 .title{
@@ -147,21 +147,88 @@ body{
 
     letter-spacing:2px;
 
+    /* رنگین‌کمان RGB */
     background:linear-gradient(
-        180deg,
-        rgb(49, 150, 218),
-        rgba(255, 251, 0, 0.507)
+        90deg,
+        #ff0000,
+        #ff7a00,
+        #ffff00,
+        #00ff00,
+        #00ffff,
+        #008cff,
+        #6a00ff,
+        #ff00ff,
+        #ff0000
     );
+
+    background-size:400% 100%;
 
     -webkit-background-clip:text;
     background-clip:text;
 
     -webkit-text-fill-color:transparent;
 
-    filter:
-        drop-shadow(
-            0 0 7px rgba(208, 255, 229, 0.55)
-        );
+    /* انیمیشن حرکت رنگ‌ها */
+    animation:
+        rgbText 4s linear infinite,
+        rgbGlow 1.5s ease-in-out infinite alternate;
+
+}
+
+
+/* حرکت رنگین‌کمان */
+
+@keyframes rgbText{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
+}
+
+
+/* درخشش RGB گیمینگ */
+
+@keyframes rgbGlow{
+
+    0%{
+        filter:
+            drop-shadow(0 0 4px rgba(255,0,0,.8))
+            drop-shadow(0 0 8px rgba(255,0,0,.35));
+    }
+
+    25%{
+        filter:
+            drop-shadow(0 0 5px rgba(255,255,0,.8))
+            drop-shadow(0 0 10px rgba(255,255,0,.35));
+    }
+
+    50%{
+        filter:
+            drop-shadow(0 0 5px rgba(0,255,100,.8))
+            drop-shadow(0 0 10px rgba(0,255,100,.35));
+    }
+
+    75%{
+        filter:
+            drop-shadow(0 0 5px rgba(0,140,255,.8))
+            drop-shadow(0 0 10px rgba(0,140,255,.35));
+    }
+
+    100%{
+        filter:
+            drop-shadow(0 0 5px rgba(255,0,255,.8))
+            drop-shadow(0 0 10px rgba(255,0,255,.35));
+    }
+
 }
 
 
@@ -191,12 +258,96 @@ body{
 
     font-size:13px;
 
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+
     backdrop-filter:blur(15px);
 
     transition:
         background .1s,
         border-color .1s,
         box-shadow .1s;
+        
+        background:linear-gradient(
+        90deg,
+        #ff0000,
+        #ff7a00,
+        #ffff00,
+        #00ff00,
+        #00ffff,
+        #008cff,
+        #6a00ff,
+        #ff00ff,
+        #ff0000
+    );
+
+    background-size:400% 100%;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    /* انیمیشن حرکت رنگ‌ها */
+    animation:
+        rgbText 4s linear infinite,
+        rgbGlow 1.5s ease-in-out infinite alternate;
+
+}
+
+
+/* حرکت رنگین‌کمان */
+
+@keyframes rgbText{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
+}
+
+
+/* درخشش RGB گیمینگ */
+
+@keyframes rgbGlow{
+
+    0%{
+        filter:
+            drop-shadow(0 0 4px rgba(255,0,0,.8))
+            drop-shadow(0 0 8px rgba(255,0,0,.35));
+    }
+
+    25%{
+        filter:
+            drop-shadow(0 0 5px rgba(255,255,0,.8))
+            drop-shadow(0 0 10px rgba(255,255,0,.35));
+    }
+
+    50%{
+        filter:
+            drop-shadow(0 0 5px rgba(0,255,100,.8))
+            drop-shadow(0 0 10px rgba(0,255,100,.35));
+    }
+
+    75%{
+        filter:
+            drop-shadow(0 0 5px rgba(0,140,255,.8))
+            drop-shadow(0 0 10px rgba(0,140,255,.35));
+    }
+
+    100%{
+        filter:
+            drop-shadow(0 0 5px rgba(255,0,255,.8))
+            drop-shadow(0 0 10px rgba(255,0,255,.35));
+    }
+
 }
 
 .login-btn:hover{
@@ -219,7 +370,7 @@ body{
     position:absolute;
 
     top:50%;
-    left:50%;
+    left:52%;
 
     transform:translate(-50%,-50%);
 
@@ -300,7 +451,7 @@ body{
        مرکز دقیق صفحه
     */
 
-    left:50%;
+    left:66%;
 
     bottom: 45px;
 
@@ -370,7 +521,7 @@ body{
 
     grid-template-columns:2.26fr 0.85fr;
 
-    grid-template-rows:1.26fr 2.26fr;
+    grid-template-rows:2.26fr 1.26fr;
 
     gap:3px;
 }
@@ -529,7 +680,7 @@ body{
 
     width:100%;
 
-    padding:15px;
+    padding:16px;
 
     margin-bottom:7px;
 
@@ -724,16 +875,17 @@ body{
 
     <div class="taskbar">
 
-        <div class="title">
+        <div class="title" style="margin-left: -1.7%;">
             !?are you gay
         </div>
 
 
         <button
             class="login-btn"
-            onclick="openLink()">
+            onclick="closeTrex()"
+            style="margin-left: -1.7%;">
 
-            🗿
+            ✖️
 
         </button>
 
@@ -744,7 +896,7 @@ body{
          مرکز صفحه
     ========================== -->
 
-    <div class="welcome">
+    <div class="welcome" style="margin-left: -1.5%;">
 
         <h1>
             701 
@@ -759,20 +911,12 @@ body{
 
     <div
         class="start-menu"
-        id="startMenu">
+        id="startMenu"
+        style="margin-left: 0%;">
 
         <h2 style="margin-bottom: 30px;">
             menu
         </h2>
-
-        <a
-            class="menu-item"
-            onclick="closeTrex()"
-            title="close Trex-0">
-
-            ❎
-
-        </a>
 
         <a
             class="menu-item"
@@ -823,6 +967,31 @@ body{
         👀
 
         </a>
+        <a
+            class="menu-item"
+            href="https://radio.garden/"
+            target="_blank">
+            
+        📻
+
+        </a>
+        <a
+            class="menu-item"
+            href="https://littlealchemy2.com/"
+            target="_blank">
+            
+        🧪
+
+        </a>
+        <a
+            class="menu-item"
+            href="https://www.window-swap.com/"
+            target="_blank">
+            
+        🪟
+
+        </a>
+
 
     </div>
 
@@ -838,7 +1007,8 @@ body{
         <div
             class="start-button"
             onclick="toggleStart()"
-            title="Start">
+            title="Start"
+            style="margin-left: -15%;">
 
             <div class="start-icon">
 
