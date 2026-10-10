@@ -231,6 +231,14 @@ body{
 
 }
 
+.scrollArea{
+    max-height: 326px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+.scrollArea::-webkit-scrollbar { width: 4px; }
+.scrollArea::-webkit-scrollbar-thumb { background: #11e40a; border-radius: 4px; }
+
 
 /* =====================================
    دکمه ورود
@@ -950,7 +958,7 @@ body{
         class="start-menu"
         id="startMenu"
         style="margin-left: 0%;">
-
+        <div class="scrollArea">
         <h2 style="margin-bottom: 30px;">
             menu
         </h2>
@@ -1126,7 +1134,34 @@ body{
         </a>
 
         </button>
+        <button class="menu-item2">
+        <a
+            class="menu-item"
+            href="https://cat-bounce.com/"
+            target="_blank">
+            
+        🐱
 
+        </a>
+        <a
+            class="menu-item"
+            href="https://zoomquilt.org/"
+            target="_blank">
+            
+        ♾️
+
+        </a>
+        <a
+            class="menu-item"
+            href="https://openguessr.com/"
+            target="_blank">
+            
+        🌍❓
+
+        </a>
+
+        </button>
+        </div>
     </div>
 
 
